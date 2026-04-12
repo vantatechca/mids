@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc \"/Users/andreidutescu/Library/Application Support/Claude/local-agent-mode-sessions/fa8578a0-f875-453a-b89f-7aa139d4d0ca/8e777c70-0e32-4693-bef3-d6388720908f/local_60222477-1899-468f-b4b5-1f88a23a272e/outputs/MID_Factory_Mega_Prompt.docx\" -o /tmp/mid_factory_mega_prompt.md)",
+      "Bash(python3 \"/Users/andreidutescu/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/8e777c70-0e32-4693-bef3-d6388720908f/fa8578a0-f875-453a-b89f-7aa139d4d0ca/skills/docx/scripts/office/unpack.py\" \"/Users/andreidutescu/Library/Application Support/Claude/local-agent-mode-sessions/fa8578a0-f875-453a-b89f-7aa139d4d0ca/8e777c70-0e32-4693-bef3-d6388720908f/local_60222477-1899-468f-b4b5-1f88a23a272e/outputs/MID_Factory_Mega_Prompt.docx\" /tmp/mid_factory_unpacked/)",
+      "Bash(python3 -c ':*)",
+      "Bash(npm --version)",
+      "Bash(psql --version)",
+      "Bash(docker --version)",
+      "Bash(brew --version)",
+      "Bash(brew install:*)",
+      "Bash(brew services:*)",
+      "Bash(export PATH=\"/opt/homebrew/opt/postgresql@16/bin:$PATH\")",
+      "Bash(createdb mid_factory)",
+      "Bash(npx create-next-app@14 . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(npx create-next-app@14 mid-factory --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
+      "Bash(shopt -s dotglob)",
+      "Bash(mv /Users/andreidutescu/MIDS/mid-factory/* /Users/andreidutescu/MIDS/)",
+      "Bash(mv /Users/andreidutescu/MIDS/mid-factory/.* /Users/andreidutescu/MIDS/)",
+      "Bash(npm install:*)",
+      "Bash(npx shadcn@latest init -d --style new-york --base-color slate --css-variables true)",
+      "Bash(npx shadcn@latest init -d)"
+    ]
+  }
+}
