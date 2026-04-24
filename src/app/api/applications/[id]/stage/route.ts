@@ -3,6 +3,7 @@ import { db } from "@/db";
 import { applications } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import type { StageChange } from "@/db/schema/applications";
+import { requireAdmin } from "@/lib/api-auth";
 
 const VALID_TRANSITIONS: Record<string, string[]> = {
   draft: ["assets_ready"],
@@ -23,6 +24,8 @@ export async function PATCH(
   req: Request,
   { params }: { params: { id: string } }
 ) {
+  const { error } = await requireAdmin();
+  if (error) return error;
   try {
     const { stage, notes, changedBy } = await req.json();
 

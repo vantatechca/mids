@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { applications, companies, processors } from "@/db/schema";
 import { desc, eq, getTableColumns } from "drizzle-orm";
+import { requireAdmin } from "@/lib/api-auth";
 
 export async function GET() {
   try {
@@ -25,6 +26,8 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
+  const { error } = await requireAdmin();
+  if (error) return error;
   try {
     const body = await req.json();
     const [created] = await db

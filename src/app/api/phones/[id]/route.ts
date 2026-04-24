@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { phoneLines } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { requireAdmin } from "@/lib/api-auth";
 
 export async function GET(
   _: Request,
@@ -27,6 +28,8 @@ export async function PATCH(
   req: Request,
   { params }: { params: { id: string } }
 ) {
+  const { error } = await requireAdmin();
+  if (error) return error;
   try {
     const body = await req.json();
     const [updated] = await db
@@ -49,6 +52,8 @@ export async function DELETE(
   _: Request,
   { params }: { params: { id: string } }
 ) {
+  const { error } = await requireAdmin();
+  if (error) return error;
   try {
     await db.delete(phoneLines).where(eq(phoneLines.id, Number(params.id)));
     return NextResponse.json({ success: true });

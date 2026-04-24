@@ -2,23 +2,28 @@ import { NextResponse } from "next/server";
 import { db } from "@/db";
 import { existingAccounts } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { requireAdmin } from "@/lib/api-auth";
+import { requireAuth, requireAdmin } from "@/lib/api-auth";
 
 export async function GET(
-  _: Request,
+  _req: Request,
   { params }: { params: { id: string } }
 ) {
+  const { error } = await requireAuth();
+  if (error) return error;
+
   try {
-    const [item] = await db
+    const id = Number(params.id);
+    const [row] = await db
       .select()
       .from(existingAccounts)
-      .where(eq(existingAccounts.id, Number(params.id)));
-    if (!item)
+      .where(eq(existingAccounts.id, id));
+    if (!row) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
-    return NextResponse.json(item);
+    }
+    return NextResponse.json(row);
   } catch {
     return NextResponse.json(
-      { error: "Failed to fetch existing account" },
+      { error: "Failed to fetch account" },
       { status: 500 }
     );
   }
@@ -30,38 +35,44 @@ export async function PATCH(
 ) {
   const { error } = await requireAdmin();
   if (error) return error;
+
   try {
+    const id = Number(params.id);
     const body = await req.json();
+    const values = {
+      ...body,
+      companyId: body.companyId ? Number(body.companyId) : null,
+      domainId: body.domainId ? Number(body.domainId) : null,
+      updatedAt: new Date(),
+    };
     const [updated] = await db
       .update(existingAccounts)
-      .set({ ...body, updatedAt: new Date() })
-      .where(eq(existingAccounts.id, Number(params.id)))
+      .set(values)
+      .where(eq(existingAccounts.id, id))
       .returning();
-    if (!updated)
-      return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(updated);
   } catch {
     return NextResponse.json(
-      { error: "Failed to update existing account" },
+      { error: "Failed to update account" },
       { status: 500 }
     );
   }
 }
 
 export async function DELETE(
-  _: Request,
+  _req: Request,
   { params }: { params: { id: string } }
 ) {
   const { error } = await requireAdmin();
   if (error) return error;
+
   try {
-    await db
-      .delete(existingAccounts)
-      .where(eq(existingAccounts.id, Number(params.id)));
-    return NextResponse.json({ success: true });
+    const id = Number(params.id);
+    await db.delete(existingAccounts).where(eq(existingAccounts.id, id));
+    return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json(
-      { error: "Failed to delete existing account" },
+      { error: "Failed to delete account" },
       { status: 500 }
     );
   }
