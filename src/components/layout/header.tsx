@@ -58,7 +58,7 @@ export function Header() {
           onClick={() => setSearchOpen(true)}
         >
           <Search className="h-4 w-4" />
-          <span>Search... (Cmd+K)</span>
+          <span>Search...</span>
         </Button>
       </div>
 
