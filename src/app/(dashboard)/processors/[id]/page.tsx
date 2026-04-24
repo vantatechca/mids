@@ -19,7 +19,7 @@ import {
 import {
   Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,
 } from "@/components/ui/dialog";
-import { ArrowLeft, Plus, Trash2, Save, Star, GripVertical, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Plus, Trash2, Save, Star, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import Link from "next/link";

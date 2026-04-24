@@ -34,7 +34,7 @@ export async function GET() {
       processors: processorsList,
       cells,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch matrix data" },
       { status: 500 }

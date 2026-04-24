@@ -1,14 +1,11 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { PIPELINE_STAGES, getStageConfig } from "@/lib/constants/pipeline-stages";
 import { Plus } from "lucide-react";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 type MatrixCell = {

@@ -10,7 +10,7 @@ export async function GET() {
       .from(communications)
       .orderBy(desc(communications.createdAt));
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch communications" },
       { status: 500 }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       .values(body)
       .returning();
     return NextResponse.json(created, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to create communication" },
       { status: 500 }

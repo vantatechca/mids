@@ -8,12 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  PIPELINE_STAGES,
-  getStageConfig,
-} from "@/lib/constants/pipeline-stages";
+import { PIPELINE_STAGES } from "@/lib/constants/pipeline-stages";
 import {
   BarChart,
   Bar,

@@ -10,7 +10,7 @@ export async function GET() {
       .from(phoneLines)
       .orderBy(desc(phoneLines.createdAt));
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch phone lines" },
       { status: 500 }
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const [created] = await db.insert(phoneLines).values(body).returning();
     return NextResponse.json(created, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to create phone line" },
       { status: 500 }

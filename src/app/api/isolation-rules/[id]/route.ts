@@ -15,7 +15,7 @@ export async function GET(
     if (!item)
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(item);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch isolation rule" },
       { status: 500 }
@@ -37,7 +37,7 @@ export async function PATCH(
     if (!updated)
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(updated);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to update isolation rule" },
       { status: 500 }
@@ -54,7 +54,7 @@ export async function DELETE(
       .delete(isolationRules)
       .where(eq(isolationRules.id, Number(params.id)));
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to delete isolation rule" },
       { status: 500 }

@@ -83,7 +83,7 @@ export async function PATCH(
       .returning();
 
     return NextResponse.json(updated);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to update application stage" },
       { status: 500 }

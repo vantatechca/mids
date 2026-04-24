@@ -65,7 +65,7 @@ export async function GET() {
       stageCounts,
       recentActivity,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch dashboard stats" },
       { status: 500 }

@@ -10,7 +10,7 @@ export async function GET() {
       .from(existingAccounts)
       .orderBy(desc(existingAccounts.createdAt));
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch existing accounts" },
       { status: 500 }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
       .values(body)
       .returning();
     return NextResponse.json(created, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to create existing account" },
       { status: 500 }

@@ -15,7 +15,7 @@ export async function GET(
     if (!item)
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(item);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch existing account" },
       { status: 500 }
@@ -37,7 +37,7 @@ export async function PATCH(
     if (!updated)
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     return NextResponse.json(updated);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to update existing account" },
       { status: 500 }
@@ -54,7 +54,7 @@ export async function DELETE(
       .delete(existingAccounts)
       .where(eq(existingAccounts.id, Number(params.id)));
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to delete existing account" },
       { status: 500 }

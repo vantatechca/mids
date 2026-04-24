@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   DndContext,
@@ -35,7 +35,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Plus, Search, Filter } from "lucide-react";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
@@ -80,8 +79,6 @@ function KanbanCard({ application }: { application: Application }) {
     transition,
     opacity: isDragging ? 0.5 : 1,
   };
-
-  const stageConfig = getStageConfig(application.stage);
 
   return (
     <div ref={setNodeRef} style={style} {...attributes} {...listeners}>

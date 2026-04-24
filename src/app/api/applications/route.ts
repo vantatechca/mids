@@ -16,7 +16,7 @@ export async function GET() {
       .leftJoin(processors, eq(applications.processorId, processors.id))
       .orderBy(desc(applications.createdAt));
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to fetch applications" },
       { status: 500 }
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
       .values(body)
       .returning();
     return NextResponse.json(created, { status: 201 });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Failed to create application" },
       { status: 500 }
