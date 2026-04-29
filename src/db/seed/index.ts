@@ -113,8 +113,18 @@ async function seed() {
   }
 
   // 5. Default admin user
+  // Password must be supplied via SEED_ADMIN_PASSWORD env var to avoid
+  // committing a weak default that could be reintroduced on every re-seed.
   console.log("\nSeeding default admin user...");
-  const passwordHash = hashSync("admin123", 10);
+  const adminPassword = process.env.SEED_ADMIN_PASSWORD;
+  if (!adminPassword || adminPassword.length < 12) {
+    throw new Error(
+      "SEED_ADMIN_PASSWORD env var is required and must be at least 12 characters. " +
+        "Set it in .env.local before running the seed (and rotate it afterward via " +
+        "scripts/rotate-admin.ts if you don't want it lingering in env files)."
+    );
+  }
+  const passwordHash = hashSync(adminPassword, 12);
   const insertedUsers = await db
     .insert(users)
     .values({
